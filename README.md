@@ -1,5 +1,6 @@
 # MB-compatibility-
 Compatibility Score for MB results 
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
@@ -30,12 +31,27 @@ Compatibility Score for MB results
     const partnerType = document.getElementById('partnerType');
     const submitBtn = document.getElementById('submitBtn');
 
+    // Populate dropdowns dynamically
+    types.forEach(t => {
+      const option1 = document.createElement("option");
+      option1.value = t;
+      option1.textContent = t;
+      yourType.appendChild(option1);
+
+      const option2 = document.createElement("option");
+      option2.value = t;
+      option2.textContent = t;
+      partnerType.appendChild(option2);
+    });
+
     function updateButtonState() {
       submitBtn.disabled = !(yourType.value && partnerType.value);
     }
 
     yourType.addEventListener('change', updateButtonState);
     partnerType.addEventListener('change', updateButtonState);
+
+    // ensure initial state
     updateButtonState();
   }
 
@@ -77,7 +93,6 @@ Compatibility Score for MB results
   <label for="yourType">Your Type:</label>
   <select id="yourType">
     <option value="">-- Select Type --</option>
-    ${types.map(t => `<option value="${t}">${t}</option>`).join('')}
   </select>
 
   <br /><br />
@@ -85,7 +100,6 @@ Compatibility Score for MB results
   <label for="partnerType">Partner's Type:</label>
   <select id="partnerType">
     <option value="">-- Select Type --</option>
-    ${types.map(t => `<option value="${t}">${t}</option>`).join('')}
   </select>
 
   <br /><br />
